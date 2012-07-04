@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">Geospatial</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_record">Record</string>
+    <string name="action_listen">Listen</string>
+    
+    <string name="record_button_caption">record</string>
+    <string name="play_button_caption">play</string>
+    <string name="stop_caption">stop</string>
+    <string name="upload_button_caption">upload</string>
+    
+    <string name="no_network">No network connection</string>
+    <string name="api_error">API Failure</string>
+    
+    <string name="place_search_hint">Place</string>
+    <string name="clear_search_hint">Clear Search</string>
+    
+</resources>

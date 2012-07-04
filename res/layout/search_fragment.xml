@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/search_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/btn_search_icon"
+        android:contentDescription="@string/place_search_hint" />
+    
+    <ImageButton 
+        android:id="@+id/clear_search_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/close_clear_cancel_icon"
+        android:contentDescription="@string/clear_search_hint" />
+    
+    <EditText
+        android:id="@+id/placesSearchEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="32dp"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/search_image"
+        android:layout_toLeftOf="@id/clear_search_image_button"
+        android:background="@android:color/background_dark"
+        android:hint="@string/place_search_hint"
+        android:iconifiedByDefault="false"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:queryHint="@string/place_search_hint"
+        android:singleLine="true"
+        android:textColor="@android:color/background_light" />
+
+    <ListView
+        android:id="@+id/foundPlacesListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_below="@id/placesSearchEditText" />
+
+</RelativeLayout>
