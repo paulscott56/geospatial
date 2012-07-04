@@ -10,11 +10,13 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
 import com.smithsector.geospatial.helpers.ApplicationContext;
 
 public class MainActivity extends SherlockFragmentActivity {
 
 	private ApplicationContext mApplicationContext;
+	private MyLocationOverlay mCurrentLocationOverlay;
 	private MapFragment mMapFragment;
 	private SearchFragment mSearchFragment;
 
@@ -24,19 +26,36 @@ public class MainActivity extends SherlockFragmentActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		mApplicationContext = ApplicationContext.initializedInstance(this);
 
 		// We instantiate the MapView here, it's really important!
-		Exchanger.mMapView = new MapView(this,
-				"0KidLa8F-i8OUWtEdF2Hy2aSZGmZfWG6JYb4mKw");
+		setupMapping();
 
 		setupFragments();
 		// We manually show the list Fragment.
 		showFragment(mMapFragment);
+	}
+
+	private void setupMapping() {
+
+		Exchanger.mMapView = new MapView(this,
+				"0KidLa8F-i8OUWtEdF2Hy2aSZGmZfWG6JYb4mKw");
+
+		mCurrentLocationOverlay = new MyLocationOverlay(this,
+				Exchanger.mMapView);
+		
+		Exchanger.mMapView.getOverlays().add(mCurrentLocationOverlay);
+
+		mCurrentLocationOverlay.runOnFirstFix(new Runnable() {
+			public void run() {
+				Exchanger.mMapView.getController().animateTo(
+						mCurrentLocationOverlay.getMyLocation());
+			}
+		});
 	}
 
 	/**
@@ -46,6 +65,7 @@ public class MainActivity extends SherlockFragmentActivity {
 	 * them.
 	 */
 	private void setupFragments() {
+		
 		final FragmentTransaction ft = getSupportFragmentManager()
 				.beginTransaction();
 
@@ -66,8 +86,7 @@ public class MainActivity extends SherlockFragmentActivity {
 				.findFragmentByTag(SearchFragment.TAG);
 		if (mSearchFragment == null) {
 			mSearchFragment = new SearchFragment();
-			ft.add(R.id.fragment_container, mSearchFragment,
-					SearchFragment.TAG);
+			ft.add(R.id.fragment_container, mSearchFragment, SearchFragment.TAG);
 		}
 		ft.hide(mSearchFragment);
 
@@ -111,10 +130,13 @@ public class MainActivity extends SherlockFragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.ic_locate:
 			if (mApplicationContext.isGPSActive()) {
+
+				mCurrentLocationOverlay.enableMyLocation();
 				showFragment(mMapFragment);
 			} else {
 				// go to Location Service settings
-				Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				Intent intent = new Intent(
+						Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 				startActivity(intent);
 			}
 			return true;
@@ -124,6 +146,8 @@ public class MainActivity extends SherlockFragmentActivity {
 			return true;
 
 		case R.id.ic_map:
+
+			mCurrentLocationOverlay.disableMyLocation();
 			showFragment(mMapFragment);
 			return true;
 		}
