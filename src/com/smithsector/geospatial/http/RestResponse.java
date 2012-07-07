@@ -1,14 +1,34 @@
 package com.smithsector.geospatial.http;
 
-public class RestResponse {
+import java.util.List;
 
-	String call;
-	public String getCall() {
-		return call;
+import com.smithsector.geospatial.entities.Place;
+
+import android.util.Log;
+
+public class RestResponse {
+	
+	public RestResponse(List<?> data, boolean success) {
+		
+		_data = data;
+		_success = success;
+	}
+
+	List<?> _data;
+	public List<?> getData() {
+		return _data;
 	}
 	
-	boolean success;
+	public void debug() {
+		
+		for (Object place : this._data) {
+			
+			Log.d("CONSOLE", "name:" + ((Place)place).name);
+		}
+	}
+	
+	boolean _success;
 	public boolean getSuccess() {
-		return success;
+		return _success;
 	}
 }

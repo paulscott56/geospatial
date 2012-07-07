@@ -43,8 +43,8 @@ public class MapFragment extends SherlockFragment implements IRestAPIDelegate {
 	@Override
 	public void receiveSuccess(RestResponse response) {
 		
-		Log.d("CONSOLE", "call: " + response.getCall());
 		Log.d("CONSOLE", "success: " + response.getSuccess());
+		Log.d("CONSOLE", "data: " + response.getData());
 	}
 
 	@Override
