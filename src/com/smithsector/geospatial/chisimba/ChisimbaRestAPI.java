@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.smithsector.geospatial.R;
-import com.smithsector.geospatial.entities.Place;
 import com.smithsector.geospatial.http.IRestAPIDelegate;
 import com.smithsector.geospatial.http.RestAPIClient;
 import com.smithsector.geospatial.http.RestFailure;
@@ -70,6 +69,10 @@ public class ChisimbaRestAPI {
 				@Override
 				public void onSuccess(String httpResponse) {
 					super.onSuccess(httpResponse);
+					
+					// this line is a hack because of the API having lost its root tag
+					httpResponse = "{\"data\": " + httpResponse + "}";
+					
 Log.d("CONSOLE", "httpResponse:" + httpResponse);					
 					Gson gson = new Gson();
 					ChisimbaResponse chisimbaResponse = gson.fromJson(httpResponse, ChisimbaResponse.class);

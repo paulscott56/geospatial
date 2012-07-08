@@ -23,7 +23,7 @@ public class RestResponse {
 		
 		for (Object place : this._data) {
 			
-			Log.d("CONSOLE", "name:" + ((Place)place).name);
+			Log.d("CONSOLE", "name:" + ((Place)place).name[0]);
 		}
 	}
 	

@@ -125,7 +125,7 @@ public class SearchFragment extends SherlockFragment implements
 	public void receiveSuccess(RestResponse response) {
 
 		Log.d("CONSOLE", "success: " + response.getSuccess());
-		Log.d("CONSOLE", "data: " + response.getData());
+		// Log.d("CONSOLE", "data: " + response.getData());
 		response.debug();
 		
 		_dialog.cancel();
@@ -183,9 +183,9 @@ public class SearchFragment extends SherlockFragment implements
 			_placeProvince = (TextView) row.findViewById(R.id.place_province);
 			_placeCountry = (TextView)row.findViewById(R.id.place_country);
 
-			_placeName.setText(place.name);
-			_placeProvince.setText(place.timezone);
-			_placeCountry.setText(place.countrycode);
+			_placeName.setText(place.name[0]);
+			_placeProvince.setText(place.timezone[0]);
+			_placeCountry.setText(place.countrycode[0]);
 
 			return row;
 		}
