@@ -1,5 +1,8 @@
 package com.smithsector.geospatial;
 
+import java.util.List;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -11,14 +14,16 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
+import com.smithsector.geospatial.chisimba.ChisimbaRestAPI;
 import com.smithsector.geospatial.helpers.ApplicationContext;
 
-public class MainActivity extends SherlockFragmentActivity {
+public class MainActivity extends SherlockFragmentActivity implements IPOISpectator {
 
 	private ApplicationContext mApplicationContext;
 	private MyLocationOverlay mCurrentLocationOverlay;
 	private MapFragment mMapFragment;
 	private SearchFragment mSearchFragment;
+	private ProgressDialog _dialog;
 
 	// We use this fragment as a pointer to the visible one, so we can hide it
 	// easily.
@@ -84,6 +89,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 		mSearchFragment = (SearchFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.place_search_fragment);
+		mSearchFragment.poiSpectator = this;
 
 		ft.commit();
 	}
@@ -128,6 +134,8 @@ public class MainActivity extends SherlockFragmentActivity {
 
 				mCurrentLocationOverlay.enableMyLocation();
 				showFragment(mMapFragment);
+				
+				mMapFragment.submitLocationQuery();
 			} else {
 				// go to Location Service settings
 				Intent intent = new Intent(
@@ -152,5 +160,11 @@ public class MainActivity extends SherlockFragmentActivity {
 		// We will always use this MapView.
 		public static MapView mMapView;
 	}
-
+	
+	/*
+	 * IPOISpectator SECTION
+	 */
+	public void receivePOIs(List<?> poiList) {
+		mMapFragment.addPOIs(poiList);
+	}
 }

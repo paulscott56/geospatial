@@ -5,7 +5,8 @@
 
     <string name="searching_for_hint">Searching for </string>
     <string name="patience_hint">Please wait</string>
-
+    <string name="nearby_poi_text">Nearby POIs</string>
+    
     <string name="place_name">Place Name</string>
     <string name="place_province">Place Province</string>
     <string name="place_country">Place Country</string>
