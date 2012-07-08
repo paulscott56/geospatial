@@ -90,22 +90,22 @@ public class SearchFragment extends SherlockFragment implements
 			}
 		});
 
-		_foundPlacesListView = (ListView) getActivity().findViewById(R.id.foundPlacesListView);
-
-		_foundPlacesAdapter = new FoundPlacesArrayAdapter(mContext,
-				R.layout.place_listitem, new ArrayList<Place>());
-		
-		_foundPlacesListView.setAdapter(_foundPlacesAdapter);
-		_foundPlacesListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-
-//				Place place = _foundPlacesAdapter.getItem(position);
-
-			}
-		});
+//		_foundPlacesListView = (ListView) getActivity().findViewById(R.id.foundPlacesListView);
+//
+//		_foundPlacesAdapter = new FoundPlacesArrayAdapter(mContext,
+//				R.layout.place_listitem, new ArrayList<Place>());
+//		
+//		_foundPlacesListView.setAdapter(_foundPlacesAdapter);
+//		_foundPlacesListView.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//
+////				Place place = _foundPlacesAdapter.getItem(position);
+//
+//			}
+//		});
 
 	}
 

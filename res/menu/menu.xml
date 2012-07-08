@@ -7,11 +7,6 @@
         android:showAsAction="always"
         android:title="Locate"/>
     <item
-        android:id="@+id/ic_list"
-        android:icon="@android:drawable/ic_menu_search"
-        android:showAsAction="always"
-        android:title="List"/>
-    <item
         android:id="@+id/ic_map"
         android:icon="@android:drawable/ic_menu_mapmode"
         android:showAsAction="always"

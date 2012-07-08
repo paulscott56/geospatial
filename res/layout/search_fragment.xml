@@ -35,11 +35,4 @@
         android:singleLine="true"
         android:textColor="@android:color/background_light" />
 
-    <ListView
-        android:id="@+id/foundPlacesListView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_below="@id/placesSearchEditText" />
-
 </RelativeLayout>

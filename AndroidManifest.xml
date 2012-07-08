@@ -23,6 +23,8 @@
         
         <activity
             android:name=".MainActivity"
+            <!-- This allows seamless orientation changes -->
+            android:configChanges="orientation|keyboardHidden" 
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

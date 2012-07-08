@@ -47,7 +47,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 		mCurrentLocationOverlay = new MyLocationOverlay(this,
 				Exchanger.mMapView);
-		
+
 		Exchanger.mMapView.getOverlays().add(mCurrentLocationOverlay);
 
 		mCurrentLocationOverlay.runOnFirstFix(new Runnable() {
@@ -65,7 +65,7 @@ public class MainActivity extends SherlockFragmentActivity {
 	 * them.
 	 */
 	private void setupFragments() {
-		
+
 		final FragmentTransaction ft = getSupportFragmentManager()
 				.beginTransaction();
 
@@ -83,12 +83,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		ft.hide(mMapFragment);
 
 		mSearchFragment = (SearchFragment) getSupportFragmentManager()
-				.findFragmentByTag(SearchFragment.TAG);
-		if (mSearchFragment == null) {
-			mSearchFragment = new SearchFragment();
-			ft.add(R.id.fragment_container, mSearchFragment, SearchFragment.TAG);
-		}
-		ft.hide(mSearchFragment);
+				.findFragmentById(R.id.place_search_fragment);
 
 		ft.commit();
 	}
@@ -139,10 +134,6 @@ public class MainActivity extends SherlockFragmentActivity {
 						Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 				startActivity(intent);
 			}
-			return true;
-
-		case R.id.ic_list:
-			showFragment(mSearchFragment);
 			return true;
 
 		case R.id.ic_map:
