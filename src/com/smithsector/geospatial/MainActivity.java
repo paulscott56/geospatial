@@ -2,7 +2,6 @@ package com.smithsector.geospatial;
 
 import java.util.List;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -14,7 +13,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
-import com.smithsector.geospatial.chisimba.ChisimbaRestAPI;
 import com.smithsector.geospatial.helpers.ApplicationContext;
 
 public class MainActivity extends SherlockFragmentActivity implements IPOISpectator {
@@ -23,7 +21,6 @@ public class MainActivity extends SherlockFragmentActivity implements IPOISpecta
 	private MyLocationOverlay mCurrentLocationOverlay;
 	private MapFragment mMapFragment;
 	private SearchFragment mSearchFragment;
-	private ProgressDialog _dialog;
 
 	// We use this fragment as a pointer to the visible one, so we can hide it
 	// easily.
@@ -89,7 +86,7 @@ public class MainActivity extends SherlockFragmentActivity implements IPOISpecta
 
 		mSearchFragment = (SearchFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.place_search_fragment);
-		mSearchFragment.poiSpectator = this;
+		mSearchFragment.mPOISpectator = this;
 
 		ft.commit();
 	}
@@ -132,6 +129,8 @@ public class MainActivity extends SherlockFragmentActivity implements IPOISpecta
 		case R.id.ic_locate:
 			if (mApplicationContext.isGPSActive()) {
 
+				Exchanger.mMapView.getOverlays().add(mCurrentLocationOverlay);
+
 				mCurrentLocationOverlay.enableMyLocation();
 				showFragment(mMapFragment);
 				
@@ -166,5 +165,9 @@ public class MainActivity extends SherlockFragmentActivity implements IPOISpecta
 	 */
 	public void receivePOIs(List<?> poiList) {
 		mMapFragment.addPOIs(poiList);
+	}
+	
+	public void clearPOIs() {
+		mMapFragment.clearPOIs();
 	}
 }

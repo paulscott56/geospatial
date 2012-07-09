@@ -73,6 +73,13 @@ public class MapFragment extends SherlockFragment implements IRestAPIDelegate {
 		populateOverlays(poiList, mBluePinDrawable);
 	}
 	
+	public void clearPOIs() {
+		
+		mMapOverlays = Exchanger.mMapView.getOverlays();
+		mMapOverlays.clear();
+		Exchanger.mMapView.invalidate();
+	}
+	
 	private void populateOverlays(List<?> poiList, Drawable pinDrawable) {
 		
 		if (poiList.size() > 0) {

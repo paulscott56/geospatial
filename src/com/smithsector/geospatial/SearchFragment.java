@@ -24,7 +24,7 @@ import com.smithsector.geospatial.http.RestResponse;
 public class SearchFragment extends SherlockFragment implements
 		IRestAPIDelegate {
 	public static final String TAG = "SearchFragment";
-	public IPOISpectator poiSpectator;
+	public IPOISpectator mPOISpectator;
 	
 	private ProgressDialog _dialog;
 	private EditText _placesSearchEditText;
@@ -74,6 +74,7 @@ public class SearchFragment extends SherlockFragment implements
 			@Override
 			public void onClick(View v) {
 				_placesSearchEditText.setText("");
+				mPOISpectator.clearPOIs();
 			}
 		});
 
@@ -99,7 +100,7 @@ public class SearchFragment extends SherlockFragment implements
 		// response.debug();
 		
 		_dialog.cancel();
-		poiSpectator.receivePOIs(response.getData());
+		mPOISpectator.receivePOIs(response.getData());
 	}
 
 	@Override
