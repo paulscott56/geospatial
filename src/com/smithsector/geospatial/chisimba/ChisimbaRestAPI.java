@@ -42,8 +42,16 @@ public class ChisimbaRestAPI {
 		_responseHandler = responseHandler;
 		
 		RequestParams params = new RequestParams();
+		String ulrEncodedName = "";
+		try {
+			ulrEncodedName = URLEncoder.encode(name, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			ulrEncodedName = "";
+			e.printStackTrace();
+		}
 		
-		doGetRequest(NAME_SEARCH_URL+name, params);
+		Log.d("CONSOLE", "url= " + NAME_SEARCH_URL+ulrEncodedName);
+		doGetRequest(NAME_SEARCH_URL+ulrEncodedName, params);
 	}
 
 	public void searchByLocation(Double latitude, Double longitude, IRestAPIDelegate responseHandler) {
