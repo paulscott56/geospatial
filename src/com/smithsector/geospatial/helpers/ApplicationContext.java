@@ -3,14 +3,16 @@ package com.smithsector.geospatial.helpers;
 import java.util.UUID;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 
 public class ApplicationContext {
 
-	//
+	private Context mContext;
 	private LocationManager mLocationManager;
 	// Listener that responds to location updates
 	private LocationListener mLocationListener;
@@ -26,6 +28,8 @@ public class ApplicationContext {
 
 	private ApplicationContext(Context context) {
 
+		mContext = context;
+		
 		PrefsProvider prefs = new PrefsProvider(context, SHARED_PREFS_FILE);
 		mUid = prefs.getString("UNIQUE_USER_ID", "");
 		if (0 == mUid.length()) {
@@ -62,15 +66,16 @@ public class ApplicationContext {
 				LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
 	}
 
-	private static ApplicationContext _instance;
+	private static ApplicationContext mInstance;
 
 	public static ApplicationContext initializedInstance(Context context) {
-		if (null == _instance) {
-			_instance = new ApplicationContext(context);
+		if (null == mInstance) {
+			mInstance = new ApplicationContext(context);
 		}
+		mInstance.ensureGPSActive();
 		// Log.d("CONSOLE", "uid: " + _instance.getUid());
 
-		return _instance;
+		return mInstance;
 	}
 
 	public double getLatitude() {
@@ -86,12 +91,23 @@ public class ApplicationContext {
 		return String.valueOf(System.currentTimeMillis() / 1000L);
 	}
 	
-	public boolean isGPSActive() {
+	public boolean ensureGPSActive() {
 		
 		// is GPS enabled?
 		boolean gpsEnabled = mLocationManager
 				.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		
+
+		if (!gpsEnabled) {
+
+			// go to Location Service settings
+			Intent intent = new Intent(
+					Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+			mContext.startActivity(intent);
+			
+			gpsEnabled = mLocationManager
+			.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		}
+
 		return gpsEnabled;
 	}
 

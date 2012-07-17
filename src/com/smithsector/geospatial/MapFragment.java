@@ -104,6 +104,8 @@ public class MapFragment extends SherlockFragment implements IRestAPIDelegate {
 			}
 			
 			mMapOverlays.add(mItemizedPOIsOverlay);
+			
+			Exchanger.mMapView.invalidate();
 		}		
 	}
 

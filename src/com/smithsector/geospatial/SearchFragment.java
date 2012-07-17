@@ -78,6 +78,20 @@ public class SearchFragment extends SherlockFragment implements
 			}
 		});
 
+		ImageButton startSearchButton = (ImageButton) getActivity()
+				.findViewById(R.id.search_image);
+		startSearchButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				
+				String searchCriteria = _placesSearchEditText.getText().toString();
+				if (searchCriteria.length() > 0) {
+					submitPlaceQuery(searchCriteria);
+				}				
+			}
+		});
+
 	}
 
 	public boolean submitPlaceQuery(String placeName) {
