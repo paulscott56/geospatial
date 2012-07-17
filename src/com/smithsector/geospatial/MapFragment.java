@@ -94,13 +94,19 @@ public class MapFragment extends SherlockFragment implements IRestAPIDelegate {
 				int lat = (int) (place.latitude[0] * 1e6);
 				int lon = (int) (place.longitude[0] * 1e6);
 				String type = place.type[0];
-				String name = place.name[0];
+				String payload = 
+					place.name[0] + "\n" +
+					place.admin1code[0] + "\n" +
+					place.countrycode[0] + "\n" +
+					"elevation: " + place.elevation[0] + "\n" +
+					"featurecode: " + place.featurecode[0] + "\n" +
+					"population: " + place.population[0];
 
 		        GeoPoint point = new GeoPoint(lat, lon);
-		        OverlayItem overlayitem = new OverlayItem(point, type, name);
+		        OverlayItem overlayitem = new OverlayItem(point, type, payload);
 		        mItemizedPOIsOverlay.addOverlay(overlayitem);
 		        
-		        Log.d("CONSOLE", "added " + name);
+		        Log.d("CONSOLE", "added " + payload);
 			}
 			
 			mMapOverlays.add(mItemizedPOIsOverlay);
