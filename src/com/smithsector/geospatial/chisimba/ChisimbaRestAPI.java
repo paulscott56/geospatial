@@ -21,9 +21,14 @@ public class ChisimbaRestAPI {
 
 	Context _context;
 	IRestAPIDelegate _responseHandler;
-	
-	private static final String NAME_SEARCH_URL = "http://geo.chisimba.com:8080/documents/";
-	private static final String LOC_SEARCH_URL = "http://geo.chisimba.com:8080/loc";
+
+/*
+	NAME_SEARCH_URL = "http://geo.chisimba.com:8080/documents/"
+	LOC_SEARCH_URL = "http://geo.chisimba.com:8080/loc"
+ */
+
+	private static final String NAME_SEARCH_URL = "http://173.203.201.87:8080/documents/";
+	private static final String LOC_SEARCH_URL = "http://173.203.201.87:8080/loc";
 
 	private ChisimbaRestAPI(Context context) {
 		_context = context;

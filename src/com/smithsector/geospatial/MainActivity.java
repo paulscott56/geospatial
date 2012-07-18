@@ -44,12 +44,12 @@ public class MainActivity extends SherlockFragmentActivity implements IPOISpecta
 
 	private void setupMapping() {
 
-//		// DEV >>
-//		Exchanger.mMapView = new MapView(this,
-//				"0KidLa8F-i8OUWtEdF2Hy2aSZGmZfWG6JYb4mKw");
-		// RELEASE >>
+		// DEV >>
 		Exchanger.mMapView = new MapView(this,
-				"07ADQq9RlfY8cxyZ3_GWUFpt47I8dJcCD4BLndA");
+				"0KidLa8F-i8OUWtEdF2Hy2aSZGmZfWG6JYb4mKw");
+//		// RELEASE >>
+//		Exchanger.mMapView = new MapView(this,
+//				"07ADQq9RlfY8cxyZ3_GWUFpt47I8dJcCD4BLndA");
 
 		mCurrentLocationOverlay = new MyLocationOverlay(this,
 				Exchanger.mMapView);

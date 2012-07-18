@@ -9,6 +9,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
+import android.widget.Toast;
 
 public class ApplicationContext {
 
@@ -46,6 +48,10 @@ public class ApplicationContext {
 				// Called when a new location is found by the network location
 				// provider.
 				mLocation = location;
+				
+//				Toast.makeText(mContext,
+//						"!!!!!! onLocationChanged",
+//						Toast.LENGTH_SHORT).show();
 			}
 
 			public void onProviderEnabled(String provider) {
@@ -63,6 +69,8 @@ public class ApplicationContext {
 		// Register the listener with the Location Manager to receive location
 		// updates
 		mLocationManager.requestLocationUpdates(
+				LocationManager.GPS_PROVIDER, 0, 0, mLocationListener);
+		mLocationManager.requestLocationUpdates(
 				LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
 	}
 
@@ -79,11 +87,29 @@ public class ApplicationContext {
 	}
 
 	public double getLatitude() {
-		return mLocation.getLatitude();
+
+		double lat = 0;
+		try {
+			lat = mLocation.getLatitude();			
+		} catch (Exception e) {
+			// return an invalid value
+			lat = -777;
+		}
+		
+		return lat;
 	}
 
 	public double getLongitude() {
-		return mLocation.getLongitude();
+
+		double lon = 0;
+		try {
+			lon = mLocation.getLongitude();			
+		} catch (Exception e) {
+			// return an invalid value
+			lon = -777;
+		}
+		
+		return lon;
 	}
 
 	public String currentUnixTimestamp() {
